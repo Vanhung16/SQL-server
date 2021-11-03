@@ -3,7 +3,20 @@
 /*ài tập 1, Viết thủ tục nhập dữ liệu vào bảng KHOA với các tham biến:
 makhoa,tenkhoa, dienthoai, hãy kiểm tra xem tên khoa đã tồn tại trước đó hay chưa, 
 nếu đã tồn tại đưa ra thông báo, nếu chưa tồn tại thì nhập vào bảng khoa, test với 2 
-trường hợp.*/create proc them_khoa(@makhoa varchar(10), @tenkhoa char(30), @dienthoai char(12))as	begin			if(exists (select * from khoa where tenkhoa = @tenkhoa))			print 'ten khoa ' + @tenkhoa + ' da ton tai!'		else 			insert into khoa values (@makhoa,@tenkhoa,@dienthoai)	endselect * from khoaexec them_khoa '123','cntt','1234'/*Bài tập 2. Hãy viết thủ tục nhập dữ liệu cho bảng Lop với các tham biến Malop,
+trường hợp.
+*/
+create proc them_khoa(@makhoa varchar(10), @tenkhoa char(30), @dienthoai char(12))
+as
+	begin	
+		if(exists (select * from khoa where tenkhoa = @tenkhoa))
+			print 'ten khoa ' + @tenkhoa + ' da ton tai!'
+		else 
+			insert into khoa values (@makhoa,@tenkhoa,@dienthoai)
+	end
+
+select * from khoa
+exec them_khoa '123','cntt','1234'
+/*Bài tập 2. Hãy viết thủ tục nhập dữ liệu cho bảng Lop với các tham biến Malop,
 Tenlop, Khoa,Hedt,Namnhaphoc,Makhoa nhập từ bàn phím.
  - Kiểm tra xem tên lớp đã có trước đó chưa nếu có thì thông báo
  - Kiểm tra xem makhoa này có trong bảng khoa hay không nếu không có thì thông 
@@ -35,6 +48,7 @@ as
 			set @KQ =0
 		else 
 			insert into khoa values (@makhoa,@tenkhoa,@dienthoai)
+		return @KQ
 	end
 declare @check int
 select * from khoa
